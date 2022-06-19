@@ -29,6 +29,10 @@ struct DetailView: View {
             Text("\(user.name) joined on \(formattedRegistration)")
                 .padding()
             
+            Text("Tags:")
+                .padding(.top)
+            TagsView(user: user)
+            
             Text("Friends List:")
                 .padding(.top)
             FriendsListView(user: user)
@@ -37,25 +41,4 @@ struct DetailView: View {
         .navigationTitle(user.name)
         .navigationBarTitleDisplayMode(.inline)
     }
-}
-
-struct FriendsListView: View {
-    let user: User
-    
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(user.friends, id: \.self) { friend in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(friend.name)
-                                .foregroundColor(.white)
-                                .font(.headline)
-                        }
-                    }
-                    .padding(.horizontal)
-                    }
-                }
-            }
-        }
 }
